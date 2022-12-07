@@ -97,7 +97,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
 
-  SCH_Add_Task(uart_send_time, 0, 5);	//sending time every 50ms
+  SCH_Add_Task(uart_send_time, 0, 50);	//sending time every 500ms
   SCH_Add_Task(ToggleLed_0, 0, 50);		//500ms
   SCH_Add_Task(ToggleLed_1, 0, 100);	//1000ms
   SCH_Add_Task(ToggleLed_2, 0, 150);	//1500ms
@@ -262,8 +262,8 @@ static void MX_GPIO_Init(void)
 uint8_t str[50];
 uint32_t	time = 0;
 void uart_send_time(void){
-	HAL_UART_Transmit(&huart2, str, sprintf(str, "%ld ", time), 100);
-	time += 50;
+	HAL_UART_Transmit(&huart2, str, sprintf(str, "Time: %ld \r", time), 100);
+	time += 500;
 }
 
 /* USER CODE END 4 */
